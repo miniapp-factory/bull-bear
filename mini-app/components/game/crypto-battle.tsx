@@ -6,12 +6,16 @@ import { Timer } from "@/components/ui/timer";
 import { useMiniAppContext } from "@/components/context/miniapp-provider";
 import { usePrivy } from "@privy-io/react-auth";
 import { TwitterShareButton } from "react-share";
+import { Chart } from "@/components/ui/chart";
+import { PointsDisplay } from "@/components/ui/points-display";
+import { Feedback } from "@/components/ui/feedback";
 
 export function CryptoBattle() {
   const { sdk, isInMiniApp } = useMiniAppContext();
   const { ready: privyReady, user } = usePrivy();
   const [btcPrice, setBtcPrice] = useState<number | null>(null);
   const [ethPrice, setEthPrice] = useState<number | null>(null);
+  const [ratioHistory, setRatioHistory] = useState<{ time: string; ratio: number }[]>([]);
   const [selected, setSelected] = useState<"BTC" | "ETH" | null>(null);
   const [points, setPoints] = useState(0);
   const [gameOver, setGameOver] = useState(false);
@@ -26,6 +30,11 @@ export function CryptoBattle() {
         const data = await res.json();
         setBtcPrice(data.bitcoin.usd);
         setEthPrice(data.ethereum.usd);
+        const ratio = data.bitcoin.usd / data.ethereum.usd;
+        setRatioHistory((prev) => [
+          ...prev,
+          { time: new Date().toLocaleTimeString(), ratio },
+        ]);
       } catch (e) {
         console.error(e);
       }
@@ -43,13 +52,13 @@ export function CryptoBattle() {
     if (btcPrice === null || ethPrice === null || !selected) return;
     const winner = btcPrice > ethPrice ? "BTC" : "ETH";
     if (winner === selected) {
-      setPoints((p) => p + 1);
+      setPoints((p) => p + 10);
     }
     setGameOver(true);
   };
 
   return (
-    <div className="flex flex-col items-center gap-4">
+    <div className="relative flex flex-col items-center gap-4">
       <h2 className="text-xl font-semibold">BTC vs ETH Battle</h2>
       <div className="flex gap-4">
         <SelectionCard
@@ -64,12 +73,16 @@ export function CryptoBattle() {
         />
       </div>
       <Timer duration={20} onComplete={evaluate} />
+      <Chart data={ratioHistory} />
       {gameOver && (
-        <div className="text-lg">
-          {selected === (btcPrice! > ethPrice! ? "BTC" : "ETH")
-            ? "Correct! +1 point."
-            : "Wrong! No points."}
-        </div>
+        <Feedback
+          message={
+            selected === (btcPrice! > ethPrice! ? "BTC" : "ETH")
+              ? "WIN! +10 Points"
+              : "LOSE! No points."
+          }
+          type={selected === (btcPrice! > ethPrice! ? "BTC" : "ETH") ? "win" : "lose"}
+        />
       )}
       <div className="text-lg">Points: {points}</div>
       {privyReady && user && (
