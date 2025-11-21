@@ -350,3 +350,125 @@
 +If on NixOS unstable, pin to stable (24.11) in configuration.nix: channel = "nixos-24.11";.
 +Clean up: sudo nix-collect-garbage -d after successful rebuild.
 +If you share the full trace, line 51 snippet (anonymized), or the module code, I can provide a more targeted fix. This should resolve the build and get your system/mini-app running.
+
+# 2025-11-21 16:55:38.956570
++Create a fully functional, single-page web mini-app called “Bulls vs Bears Crypto Fight Arena” — a real-time clicker battle between Bulls and Bears with 100% crypto meme aesthetics.
++
++Core concept:
++- Bulls (green laser eyes, Bitcoin horns) vs Bears (red laser eyes, short positions).
++- Players pick a side (Bull or Bear) on login.
++- Every click/fight adds +1 power to the chosen side.
++- Global “Crypto Mood Index” (0–100) moves in real time: >70 = super bullish (green candles everywhere), <30 = bear market apocalypse.
++- The app must be extremely viral and shareable inside Crypto Twitter (X).
++
++Mandatory login methods (player must be able to sign in with any of these):
++1. X / Twitter OAuth (use OAuth 2.0 + PKCE, preferably with NextAuth.js or Auth.js Twitter provider).
++2. Privy.io (embedded wallet + social login — make this the primary and smoothest flow).
++3. Google OAuth (standard Google Sign-In).
++
++After login show player’s avatar, username, and currently chosen side.
++
++Gameplay:
++- Two huge buttons: green “BULL FIGHT!” and red “BEAR FIGHT!”.
++- On click → epic fight animation (confetti + screen shake + canvas punch or Lottie animation).
++- Real-time global counter updates for both sides + Crypto Mood Index progress bar in the center.
++- Live leaderboards: Top 10 Bulls and Top 10 Bears by total clicks.
++- Every 1 000 fights → on-chain micro-prize (e.g. 0.01 USDC on Base via Privy — can be placeholder for now).
++
++Tech stack (use exactly this — it’s the fastest and most deployable):
++- Frontend: Next.js 14 (App Router) + TypeScript + Tailwind CSS
++- Auth:
++  – Privy (main web3 login)
++  – NextAuth.js / Auth.js for Twitter + Google providers
++- Real-time database: Supabase (PostgreSQL + Realtime) or Firebase
++- Deployment: Vercel (one-click)
++
++Virality features (must-have):
++- After every fight generate a shareable image: Bull kicking Bear or Bear mauling Bull, with player’s @username and text like “I just sent the bears to the moon!” or “I just rekt the bulls hard”.
++- One-click “Share on X” button with pre-filled tweet:
++  “Just smashed the [Bears/Bulls]! Crypto Mood Index now at XX% 🚀/🩸 Join the arena: [link] #BullsVsBears”
++- Referral system: invite a friend → both get +10 bonus clicks.
++
++Visual style:
++- Pure crypto-punk neon: black background, glowing green/red accents, laser eyes everywhere.
++- Use cool 3D bull/bear models (GLB) or high-quality illustrations.
++- Fully mobile-responsive.
++
++Deliver full working code:
++- Complete Next.js 14 project structure
++- All pages and components (login page, main arena page, profile modal, etc.)
++- Privy + NextAuth configuration (Twitter + Google providers)
++- Supabase client setup + required tables (users, fights, referrals, leaderboards)
++- Fight animation (canvas or confetti + react-screen-shake)
++- Share-to-X button with URL-encoded tweet
++- Image generation for shares (use canvas API or a simple template + html-to-image)
++- All necessary environment variables clearly listed
++
++The final repository must be ready to:
++1. git clone
++2. fill .env with Privy App ID, Supabase URL/anon key, Twitter API keys, Google Client ID
++3. npm install → npm run dev (works locally)
++4. deploy to Vercel with one click
++
++Make it as plug-and-play as possible — I want to launch this on Crypto Twitter in under an hour after you give me the code.
+
+# 2025-11-21 16:55:38.957685
++Create a fully functional, single-page web mini-app called “Bulls vs Bears Crypto Fight Arena” — a real-time clicker battle between Bulls and Bears with 100% crypto meme aesthetics.
++
++Core concept:
++- Bulls (green laser eyes, Bitcoin horns) vs Bears (red laser eyes, short positions).
++- Players pick a side (Bull or Bear) on login.
++- Every click/fight adds +1 power to the chosen side.
++- Global “Crypto Mood Index” (0–100) moves in real time: >70 = super bullish (green candles everywhere), <30 = bear market apocalypse.
++- The app must be extremely viral and shareable inside Crypto Twitter (X).
++
++Mandatory login methods (player must be able to sign in with any of these):
++1. X / Twitter OAuth (use OAuth 2.0 + PKCE, preferably with NextAuth.js or Auth.js Twitter provider).
++2. Privy.io (embedded wallet + social login — make this the primary and smoothest flow).
++3. Google OAuth (standard Google Sign-In).
++
++After login show player’s avatar, username, and currently chosen side.
++
++Gameplay:
++- Two huge buttons: green “BULL FIGHT!” and red “BEAR FIGHT!”.
++- On click → epic fight animation (confetti + screen shake + canvas punch or Lottie animation).
++- Real-time global counter updates for both sides + Crypto Mood Index progress bar in the center.
++- Live leaderboards: Top 10 Bulls and Top 10 Bears by total clicks.
++- Every 1 000 fights → on-chain micro-prize (e.g. 0.01 USDC on Base via Privy — can be placeholder for now).
++
++Tech stack (use exactly this — it’s the fastest and most deployable):
++- Frontend: Next.js 14 (App Router) + TypeScript + Tailwind CSS
++- Auth:
++  – Privy (main web3 login)
++  – NextAuth.js / Auth.js for Twitter + Google providers
++- Real-time database: Supabase (PostgreSQL + Realtime) or Firebase
++- Deployment: Vercel (one-click)
++
++Virality features (must-have):
++- After every fight generate a shareable image: Bull kicking Bear or Bear mauling Bull, with player’s @username and text like “I just sent the bears to the moon!” or “I just rekt the bulls hard”.
++- One-click “Share on X” button with pre-filled tweet:
++  “Just smashed the [Bears/Bulls]! Crypto Mood Index now at XX% 🚀/🩸 Join the arena: [link] #BullsVsBears”
++- Referral system: invite a friend → both get +10 bonus clicks.
++
++Visual style:
++- Pure crypto-punk neon: black background, glowing green/red accents, laser eyes everywhere.
++- Use cool 3D bull/bear models (GLB) or high-quality illustrations.
++- Fully mobile-responsive.
++
++Deliver full working code:
++- Complete Next.js 14 project structure
++- All pages and components (login page, main arena page, profile modal, etc.)
++- Privy + NextAuth configuration (Twitter + Google providers)
++- Supabase client setup + required tables (users, fights, referrals, leaderboards)
++- Fight animation (canvas or confetti + react-screen-shake)
++- Share-to-X button with URL-encoded tweet
++- Image generation for shares (use canvas API or a simple template + html-to-image)
++- All necessary environment variables clearly listed
++
++The final repository must be ready to:
++1. git clone
++2. fill .env with Privy App ID, Supabase URL/anon key, Twitter API keys, Google Client ID
++3. npm install → npm run dev (works locally)
++4. deploy to Vercel with one click
++
++Make it as plug-and-play as possible — I want to launch this on Crypto Twitter in under an hour after you give me the code.
