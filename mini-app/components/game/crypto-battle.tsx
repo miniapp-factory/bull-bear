@@ -59,6 +59,7 @@ export function CryptoBattle() {
 
   return (
     <div className="relative flex flex-col items-center gap-4">
+      <PointsDisplay points={points} />
       <h2 className="text-xl font-semibold">BTC vs ETH Battle</h2>
       <div className="flex gap-4">
         <SelectionCard
